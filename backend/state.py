@@ -114,8 +114,8 @@ class AppState:
 
 	@classmethod
 	def init(cls, app: Starlette) -> AppState:
-		# db_url = env.get("DATABASE_URL", default="sqlite:///./data.db")
-		db_url = env.get("DATABASE_URL", default="sqlite:////tmp/data.db")
+		db_url = env.get("DATABASE_URL", default="sqlite:///./data.db")
+		# db_url = env.get("DATABASE_URL", default="sqlite:////tmp/data.db")
 		connect_args = {}
 		if db_url.startswith("sqlite"):
 			connect_args = {"check_same_thread": False}
