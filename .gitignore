@@ -23,6 +23,7 @@ node_modules
 
 .venv/
 __pycache__/
+data.db
 
 requirement.txt
 
