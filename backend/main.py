@@ -47,28 +47,28 @@ host = env.get("HOST", default="0.0.0.0")
 
 @asynccontextmanager
 async def lifespan(app: Starlette):
-	if dev:
-		proc = await asyncio.create_subprocess_exec(
-			"npm",
-			"run",
-			"build",
-			"--",
-			"--watch",
-			"--sourcemap",
-			"inline",
-			"--minify",
-			"false",
-		)
-		state = AppState.init(app)
-		yield
-		await state.deinit()
-		if proc.returncode is None:
-			proc.terminate()
-			await proc.wait()
-	else:
-		state = AppState.init(app)
-		yield
-		await state.deinit()
+	# if dev:
+	# 	proc = await asyncio.create_subprocess_exec(
+	# 		"npm",
+	# 		"run",
+	# 		"build",
+	# 		"--",
+	# 		"--watch",
+	# 		"--sourcemap",
+	# 		"inline",
+	# 		"--minify",
+	# 		"false",
+	# 	)
+	# 	state = AppState.init(app)
+	# 	yield
+	# 	await state.deinit()
+	# 	if proc.returncode is None:
+	# 		proc.terminate()
+	# 		await proc.wait()
+	# else:
+	state = AppState.init(app)
+	yield
+	await state.deinit()
 
 
 app = Starlette(
@@ -83,7 +83,7 @@ app = Starlette(
 )
 
 if __name__ == "__main__":
-	if dev:
-		uvicorn.run("backend.main:app", host="127.0.0.1", port=port, reload=True)
-	else:
-		uvicorn.run(app, host=host, port=port)
+	# if dev:
+	# 	uvicorn.run("backend.main:app", host="127.0.0.1", port=port, reload=True)
+	# else:
+	uvicorn.run(app, host=host, port=port)
